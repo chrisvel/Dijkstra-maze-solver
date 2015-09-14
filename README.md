@@ -1,6 +1,7 @@
 ##2d matrix maze solver
 
  The story:
+ 
  The program parses the maze as a string when the object is initialized and
  saves it in an array. The nodes are saved in series, so we need to reverse
  the table in order to use the matrix as a table [x,y].
