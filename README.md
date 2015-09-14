@@ -1,5 +1,4 @@
-
- ## 2d matrix maze solver
+##2d matrix maze solver
 
  The story:
  The program parses the maze as a string when the object is initialized and
