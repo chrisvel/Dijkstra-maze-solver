@@ -33,12 +33,21 @@
 
 The execution of the program is pretty simple:
 
- `ruby main.rb data\maze.txt [argument]`
+`ruby main.rb data\maze.txt [argument]`
 
 Where `[argument]` can be:
  * `nil`: the program does not output anything
  * `pst`: prints final statistics for the maze and the solution
  * `pnf`: prints the final node set with distances and previous nodes
  * `ptr`: print the table and the 1d numbers generated
+ * `out`: returns the result table
+
+The result table can also be redirected to a file:
+
+`ruby main.rb data\maze.txt out > output.txt`
+
+in array format:
+
+`[[2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [6, 8], [6, 9]]`
 
 Simple error checking is made when the file does not exist or the arguments are wrong and the appropriate error is printed on the console.

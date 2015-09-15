@@ -1,13 +1,16 @@
 require_relative "solver.rb"
 
-system('clear')
-puts "~" * 50
-puts "MazeSolver"
-puts "~" * 50
+def print_header
+  system('clear')
+  puts "~" * 50
+  puts "MazeSolver"
+  puts "~" * 50
+end
 
 if __FILE__ == $0
   case ARGV[0]
   when nil
+    puts header
     puts "ERROR: You didn't choose a file with data!"
     puts
   else
@@ -18,20 +21,26 @@ if __FILE__ == $0
 
       case ARGV[1]
       when "ptr"
+        puts header
         # print the table and the 1d numbers generated
         puts result.inspect
 
       when "pst"
+        puts header
         # print final stats
         solve_my_maze.print_stats
 
       when "pnf"
+        puts header
         # print the final node set with distances and previous nodes
         solve_my_maze.print_nodes_final
 
       when "ptr"
+        puts header
         # print the table and the 1d numbers generated
         solve_my_maze.print_table_reverse
+      when "out"
+        puts result.inspect
       else
         puts "ERROR: Wrong arguments"
         puts
