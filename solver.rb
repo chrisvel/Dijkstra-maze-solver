@@ -31,10 +31,13 @@
 #
 ##
 
+require 'json'
+
 class MazeSolver
 
-  def initialize(maze)
-    @maze_str = maze
+  def initialize(file)
+    @file = file
+    @data = ""
     @table = Array.new
     @table_reversed = Array.new
     @table_merged = Array.new
@@ -59,7 +62,8 @@ class MazeSolver
   def parse_maze
 
     k = 0
-    @maze_str.strip.split(/[\l|\n\/]/).each do |line|
+    @data = File.read(@file)
+    @data.strip.split(/[\l|\n\/]/).each do |line|
       @row = Array.new
       line.split(/ /).each do |item|
         @row << item
@@ -222,7 +226,6 @@ class MazeSolver
         end
 
         # break the loop
-        print_stats
         return @shortest_path_coords
         break
       end
@@ -242,6 +245,8 @@ class MazeSolver
 
   # prints stats.. what else ?
   def print_stats
+    puts @data
+    puts "~" * 50
     puts "Start node: #{@start_node}"
     puts "Goal node: #{@goal_node}"
     puts "Backtrack: #{@backtrack.inspect}"
@@ -252,5 +257,11 @@ class MazeSolver
     puts "~" * 50
     puts
   end # print_stats
+
+  def print_nodes_final
+    puts
+    puts @node_list
+    puts
+  end
 
 end

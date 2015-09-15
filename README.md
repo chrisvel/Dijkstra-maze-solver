@@ -1,7 +1,7 @@
 ##2d matrix maze solver
 
  The story:
- 
+
  The program parses the maze as a string when the object is initialized and
  saves it in an array. The nodes are saved in series, so we need to reverse
  the table in order to use the matrix as a table [x,y].
@@ -29,3 +29,16 @@
  * https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
  * Various youtube lecture videos on Dijkstra's algorithm
 
+###Usage
+
+The execution of the program is pretty simple:
+
+ `ruby main.rb data\maze.txt [argument]`
+
+Where `[argument]` can be:
+ * `nil`: the program does not output anything
+ * `pst`: prints final statistics for the maze and the solution
+ * `pnf`: prints the final node set with distances and previous nodes
+ * `ptr`: print the table and the 1d numbers generated
+
+Simple error checking is made when the file does not exist or the arguments are wrong and the appropriate error is printed on the console.
