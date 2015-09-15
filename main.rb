@@ -14,12 +14,16 @@ if __FILE__ == $0
     case File.exist?(ARGV[0])
     when true
       solve_my_maze = MazeSolver.new(ARGV[0])
-      solve_my_maze.solve_dijkstra
+      result = solve_my_maze.solve_dijkstra
 
       case ARGV[1]
+      when "ptr"
+        # print the table and the 1d numbers generated
+        puts result.inspect
+
       when "pst"
         # print final stats
-        puts solve_my_maze.print_stats
+        solve_my_maze.print_stats
 
       when "pnf"
         # print the final node set with distances and previous nodes
@@ -29,7 +33,7 @@ if __FILE__ == $0
         # print the table and the 1d numbers generated
         solve_my_maze.print_table_reverse
       else
-        "ERROR: Wrong arguments"
+        puts "ERROR: Wrong arguments"
         puts
       end
     else
