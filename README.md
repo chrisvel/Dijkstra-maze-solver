@@ -36,7 +36,6 @@ The execution of the program is pretty simple:
 `ruby main.rb data/maze.txt [argument]`
 
 Where `[argument]` can be:
- * `nil`: the program does not output anything
  * `pst`: prints final statistics for the maze and the solution
  * `pnf`: prints the final node set with distances and previous nodes
  * `ptr`: print the table and the 1d numbers generated
