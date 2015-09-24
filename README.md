@@ -33,7 +33,7 @@
 
 The execution of the program is pretty simple:
 
-`ruby main.rb data\maze.txt [argument]`
+`ruby main.rb data/maze.txt [argument]`
 
 Where `[argument]` can be:
  * `nil`: the program does not output anything

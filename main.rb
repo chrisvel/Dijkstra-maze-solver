@@ -1,6 +1,6 @@
 require_relative "solver.rb"
 
-def print_header
+def header
   system('clear')
   puts "~" * 50
   puts "MazeSolver"
