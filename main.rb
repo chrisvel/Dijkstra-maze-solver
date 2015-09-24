@@ -39,9 +39,10 @@ if __FILE__ == $0
         puts header
         # print the table and the 1d numbers generated
         solve_my_maze.print_table_reverse
+
       when "out"
-        # returns the result of the solution in array format
-        result
+        # returns the result of the solution in array format (almost same as previous)
+        puts result.inspect
 
       else
         puts "ERROR: Wrong arguments"

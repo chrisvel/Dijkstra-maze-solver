@@ -43,7 +43,7 @@ Where `[argument]` can be:
 
 The result table can also be redirected to a file:
 
-`ruby main.rb data\maze.txt out > output.txt`
+`ruby main.rb data/maze.txt out > output.txt`
 
 in array format:
 
