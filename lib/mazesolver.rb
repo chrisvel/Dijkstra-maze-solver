@@ -93,7 +93,6 @@ class MazeSolver
     z = 0 # will be used as a node number
     @table_reversed.each do |row|
       row.each do |item|
-        k = @nodes[z]
         @start_node = z if item == "S"
 
         # create a simple array with all values
@@ -122,7 +121,6 @@ class MazeSolver
   # initialize nodes structure
   def create_nodes
 
-    nodes = []
     previous_node = nil
 
     # set the current node as the start one
@@ -237,7 +235,6 @@ class MazeSolver
 
     # create a table with the 1d and the 2d array node values
     @shortest_path = []
-    count = 0
 
     @backtrack.each do |p|
       @shortest_path << [p, @table_convert[p]]
