@@ -53,6 +53,7 @@ class MazeSolver
     @shortest_path_coords = []
     @backtrack = []
     read_file
+    set_reversed_table
     parse_maze
     create_nodes
   end
@@ -74,11 +75,13 @@ class MazeSolver
     end
   end
 
-  # convert the maze string to an array of arrays
-  def parse_maze
-
+  def set_reversed_table
     # flip table values horizontally
     @table_reversed = @table.reverse
+  end
+
+  # convert the maze string to an array of arrays
+  def parse_maze
 
     # search for start node but not for the goal node
     # the robot does not know where the goal node is but we need to find out
