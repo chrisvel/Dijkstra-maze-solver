@@ -1,54 +1,73 @@
-require_relative "solver.rb"
+#!/usr/bin/env ruby
 
-def header
-  system('clear')
-  puts "~" * 50
-  puts "MazeSolver"
-  puts "~" * 50
+require_relative "lib/solver.rb"
+require 'optparse'
+
+options = {}
+
+option_parser = OptionParser.new do |opt|
+  opt.banner = "
+    MazeSolver v1.0.1 - Solves mazes with walls...
+    Usage: main.rb -f <filename> [OPTIONS]
+
+    Options
+    "
+  opt.on("-f","choose the path and the filename of the maze") do
+    options[:file] = true
+  end
+  opt.on("--ptb","prints the table and the 1d numbers generated") do
+    options[:ptb] = true
+  end
+  opt.on("--pst","prints statistics") do
+    options[:pst] = true
+  end
+  opt.on("--pnf","prints the final node set with distances and previous nodes") do
+    options[:pnf] = true
+  end
+  opt.on("--ptr","prints the table and the 1d numbers generated") do
+    options[:ptr] = true
+  end
+  opt.on("-o","--out","returns the result of the solution in array format (almost same as previous)") do
+    options[:out] = true
+  end
+  opt.separator ""
 end
 
-case ARGV[0]
-when nil
-  puts header
-  puts "ERROR: You didn't choose a file with data!"
-  puts
-else
-  case File.exist?(ARGV[0])
-  when true
+begin
+  option_parser.parse!
+  rescue OptionParser::InvalidOption => error
+  puts "Cannot recognize #{ error }"
+  exit
+  rescue OptionParser::AmbiguousOption => error
+  puts "That's an #{ error}"
+  exit
+end
+
+
+if options[:file]
+  begin
     solve_my_maze = MazeSolver.new(ARGV[0])
     result = solve_my_maze.solve_dijkstra
-
-    case ARGV[1]
-    when "ptr"
-      puts header
+    if options[:ptb]
       # print the table and the 1d numbers generated
       puts result.inspect
-
-    when "pst"
-      puts header
+    elsif options[:pst]
       # print final stats
       solve_my_maze.print_stats
-
-    when "pnf"
-      puts header
+    elsif options[:pnf]
       # print the final node set with distances and previous nodes
       solve_my_maze.print_nodes_final
-
-    when "ptr"
-      puts header
+    elsif options[:ptr]
       # print the table and the 1d numbers generated
       solve_my_maze.print_table_reverse
-
-    when "out"
+    elsif options[:out]
       # returns the result of the solution in array format (almost same as previous)
       puts result.inspect
-
-    else
-      puts "ERROR: Wrong arguments"
-      puts
     end
-  else
-    puts "ERROR: File #{ARGV[0]} does not exist."
-    puts
+  rescue TypeError, ArgumentError
+      puts "ERROR: You didn't set a file name"
+    rescue Errno::ENOENT
+      puts "ERROR: File \"#{ARGV[0]}\" does not exist"
+      puts
   end
 end
