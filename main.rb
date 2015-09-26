@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative "lib/solver.rb"
+require_relative "lib/mazesolver.rb"
 require 'optparse'
 
 options = {}
@@ -42,7 +42,6 @@ begin
   puts "That's an #{ error}"
   exit
 end
-
 
 if options[:file]
   begin
