@@ -38,22 +38,22 @@ class MazeSolver
   def initialize(file)
     @file = file
     @data = ""
-    @table = Array.new
-    @table_reversed = Array.new
-    @table_merged = Array.new
-    @table_convert = Array.new
-    @nodes = Array.new
+    @table = []
+    @table_reversed = []
+    @table_merged = []
+    @table_convert = []
+    @nodes = []
     @step = 1
     @start_node = 999
     @goal_node =  999
     @current_node = 999
     @table_x = 0
     @table_y = 0
-    @unvisited_set = Array.new
-    @node_list = Array.new
-    @shortest_path = Array.new
-    @shortest_path_coords = Array.new
-    @backtrack = Array.new
+    @unvisited_set = []
+    @node_list = []
+    @shortest_path = []
+    @shortest_path_coords = []
+    @backtrack = []
     parse_maze
     create_nodes
   end
@@ -64,7 +64,7 @@ class MazeSolver
     k = 0
     @data = File.read(@file)
     @data.strip.split(/[\l|\n\/]/).each do |line|
-      @row = Array.new
+      @row = []
       line.split(/ /).each do |item|
         @row << item
         # append an incremental number for each node, for example
@@ -113,7 +113,7 @@ class MazeSolver
   # initialize nodes structure
   def create_nodes
 
-    nodes = Array.new
+    nodes = []
     previous_node = nil
 
     # set the current node as the start one
@@ -176,7 +176,7 @@ class MazeSolver
     unvisited_set = @unvisited_set.dup
 
     # create a queue for nodes to check
-    @queue = Array.new
+    @queue = []
     current_node = @start_node
     @queue << current_node
 
@@ -206,7 +206,7 @@ class MazeSolver
       if current_node == @goal_node
 
         # go backwards to retrieve the shortest path
-        @backtrack = Array.new
+        @backtrack = []
         @backtrack << current_node
 
         # iterate until we arrive at the start node
@@ -217,7 +217,7 @@ class MazeSolver
         end
 
         # create a table with the 1d and the 2d array node values
-        @shortest_path = Array.new
+        @shortest_path = []
         count = 0
 
         @backtrack.each do |p|
