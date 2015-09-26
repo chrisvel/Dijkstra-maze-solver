@@ -30,7 +30,6 @@
 # * Various youtube lecture videos on Dijkstra's algorithm
 #
 ##
-
 class MazeSolver
 
   def initialize(file)
@@ -55,6 +54,7 @@ class MazeSolver
     read_file
     set_reversed_table
     parse_maze
+    create_unvisited_set
     set_table_size
     create_nodes
   end
@@ -76,8 +76,9 @@ class MazeSolver
     end
   end
 
+  # flip table values horizontally
   def set_reversed_table
-    # flip table values horizontally
+
     @table_reversed = @table.reverse
   end
 
@@ -97,20 +98,20 @@ class MazeSolver
 
         # create a simple array with all values
         @table_merged << item
-        @table_convert << [item, [x,y]]
+        @table_convert << [item, [x, y]]
         y = y + 1
         z = z + 1
       end
       x = x + 1
       y = 0
     end
+  end # parse_maze
 
-    # create the unvisited set of nodes but remove walls
+  # create the unvisited set of nodes but remove walls
+  def create_unvisited_set
     @unvisited_set = @nodes.map { |r| r if @table_merged[r] != "X" }
     @unvisited_set.delete(nil)
-
-    return @table_reversed
-  end # parse_maze
+  end
 
   # set table size values
   def set_table_size
@@ -126,6 +127,8 @@ class MazeSolver
 
     # set the current node as the start one
     @current_node = @start_node
+
+    # create a copy of the instance set
     unvisited_set = @unvisited_set.dup
 
     # iterate until there are no unvisited nodes
@@ -154,6 +157,7 @@ class MazeSolver
       if (@current_node + @step) % @table_x != 0 && @table_merged[right_node] != "X"
         neighbours << right_node
       end
+
       # check If the current node is the goal node
       @goal_node = @current_node if @table_merged[@current_node] == "G"
 
@@ -168,10 +172,10 @@ class MazeSolver
       # calculate their tentative distances. In the current solver
       # all distances of the neighbour nodes are 1.
       @node_list << {
-        :id => @current_node,
-        :neighs => neighbours,
-        :dist => @distance,
-        :prev => previous_node
+        id: @current_node,
+        neighs: neighbours,
+        dist: @distance,
+        prev: previous_node
       }
     end
 
@@ -212,33 +216,34 @@ class MazeSolver
       end
 
       if current_node == @goal_node
-
-        # go backwards to retrieve the shortest path
-        @backtrack = []
-        @backtrack << current_node
-
-        # iterate until we arrive at the start node
-        while rolling_node[:prev] != nil do
-          temp_node = @node_list.find { |hash| hash[:id] == rolling_node[:prev] }
-          @backtrack << temp_node[:id]
-          rolling_node = temp_node
-        end
-
-        # create a table with the 1d and the 2d array node values
-        @shortest_path = []
-        count = 0
-
-        @backtrack.each do |p|
-          @shortest_path << [p, @table_convert[p]]
-          @shortest_path_coords << @table_convert[p][1]
-        end
-
-        # break the loop
-        return @shortest_path_coords
+        shortest_path(rolling_node)
         break
       end
     end
   end # solve_dijkstra
+
+  # Retrieves the shortest path by backtracking
+  def shortest_path(rolling_node)
+
+    @backtrack = []
+    @backtrack << @goal_node
+
+    # iterate until we arrive at the start node
+    while rolling_node[:prev] != nil do
+      temp_node = @node_list.find { |hash| hash[:id] == rolling_node[:prev] }
+      @backtrack << temp_node[:id]
+      rolling_node = temp_node
+    end
+
+    # create a table with the 1d and the 2d array node values
+    @shortest_path = []
+    count = 0
+
+    @backtrack.each do |p|
+      @shortest_path << [p, @table_convert[p]]
+      @shortest_path_coords << @table_convert[p][1]
+    end
+  end
 
   # prints the reversed table
   def print_table_reverse

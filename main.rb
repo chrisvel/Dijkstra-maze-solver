@@ -12,22 +12,22 @@ option_parser = OptionParser.new do |opt|
 
     Options
     "
-  opt.on("-f","choose the path and the filename of the maze") do
+  opt.on("-f", "choose the path and the filename of the maze") do
     options[:file] = true
   end
-  opt.on("--ptb","prints the table and the 1d numbers generated") do
+  opt.on("--ptb", "prints the table and the 1d numbers generated") do
     options[:ptb] = true
   end
-  opt.on("--pst","prints statistics") do
+  opt.on("--pst", "prints statistics") do
     options[:pst] = true
   end
-  opt.on("--pnf","prints the final node set with distances and previous nodes") do
+  opt.on("--pnf", "prints the final node set with distances and previous nodes") do
     options[:pnf] = true
   end
-  opt.on("--ptr","prints the table and the 1d numbers generated") do
+  opt.on("--ptr", "prints the table and the 1d numbers generated") do
     options[:ptr] = true
   end
-  opt.on("-o","--out","returns the result of the solution in array format (almost same as previous)") do
+  opt.on("-o", "--out", "returns the result of the solution in array format (almost same as previous)") do
     options[:out] = true
   end
   opt.separator ""
