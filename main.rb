@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative "lib/mazesolver.rb"
+require_relative "lib/mazeprint.rb"
 require 'optparse'
 
 options = {}
@@ -47,23 +48,37 @@ if options[:file]
   begin
     solve_my_maze = MazeSolver.new(ARGV[0])
     result = solve_my_maze.solve_dijkstra
+
+    args = [
+      table_merged: solve_my_maze.table_merged,
+      nodes: solve_my_maze.nodes,
+      table_x: solve_my_maze.table_x,
+      start_node: solve_my_maze.start_node,
+      goal_node: solve_my_maze.goal_node,
+      backtrack: solve_my_maze.backtrack,
+      shortest_path: solve_my_maze.shortest_path,
+      node_list: solve_my_maze.node_list,
+      data: solve_my_maze.data
+    ]
+    print_maze_stats = MazePrint.new(*args)
+
     if options[:ptb]
       # print the table and the 1d numbers generated
       puts result.inspect
     elsif options[:pst]
       # print final stats
-      solve_my_maze.print_stats
+      print_maze_stats.print_stats
     elsif options[:pnf]
       # print the final node set with distances and previous nodes
-      solve_my_maze.print_nodes_final
+      print_maze_stats.print_nodes_final
     elsif options[:ptr]
       # print the table and the 1d numbers generated
-      solve_my_maze.print_table_reverse
+      print_maze_stats.print_table_reverse
     elsif options[:out]
       # returns the result of the solution in array format (almost same as previous)
       puts result.inspect
     end
-  rescue TypeError, ArgumentError
+    rescue TypeError, ArgumentError
       puts "ERROR: You didn't set a file name"
     rescue Errno::ENOENT
       puts "ERROR: File \"#{ARGV[0]}\" does not exist"

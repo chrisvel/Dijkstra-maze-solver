@@ -32,6 +32,8 @@
 ##
 class MazeSolver
 
+  attr_reader :table_merged, :nodes, :table_x, :data, :start_node, :goal_node, :shortest_path, :backtrack, :node_list
+
   def initialize(file)
     @file = file
     @data = ""
@@ -214,14 +216,15 @@ class MazeSolver
       end
 
       if current_node == @goal_node
-        shortest_path(rolling_node)
+        find_shortest_path(rolling_node)
         break
       end
     end
+    return @shortest_path_coords
   end # solve_dijkstra
 
   # Retrieves the shortest path by backtracking
-  def shortest_path(rolling_node)
+  def find_shortest_path(rolling_node)
 
     @backtrack = []
     @backtrack << @goal_node
@@ -240,38 +243,6 @@ class MazeSolver
       @shortest_path << [p, @table_convert[p]]
       @shortest_path_coords << @table_convert[p][1]
     end
-  end
-
-  # prints the reversed table
-  def print_table_reverse
-    z = 0 # will be used as a node number
-    @table_merged.each do |item|
-      node = @nodes[z]
-      print "#{item} (#{node}) \t"
-      z = z + 1
-      puts if z % @table_x == 0
-    end
-  end # print_table_reverse
-
-  # prints stats.. what else ?
-  def print_stats
-    puts @data
-    puts "~" * 50
-    puts "Start node: #{@start_node}"
-    puts "Goal node: #{@goal_node}"
-    puts "Backtrack: #{@backtrack.inspect}"
-    puts "Shortest Path: "
-    @shortest_path.each do |p|
-      puts "#{p[0]} \t #{p[1]}"
-    end
-    puts "~" * 50
-    puts
-  end # print_stats
-
-  def print_nodes_final
-    puts
-    puts @node_list
-    puts
   end
 
 end
