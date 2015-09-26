@@ -31,8 +31,6 @@
 #
 ##
 
-require 'json'
-
 class MazeSolver
 
   def initialize(file)
@@ -54,13 +52,13 @@ class MazeSolver
     @shortest_path = []
     @shortest_path_coords = []
     @backtrack = []
+    read_file
     parse_maze
     create_nodes
   end
 
-  # convert the maze string to an array of arrays
-  def parse_maze
-
+  # reads data from the maze file to @table
+  def read_file
     k = 0
     @data = File.read(@file)
     @data.strip.split(/[\l|\n\/]/).each do |line|
@@ -74,6 +72,10 @@ class MazeSolver
       end
       @table << @row
     end
+  end
+
+  # convert the maze string to an array of arrays
+  def parse_maze
 
     # flip table values horizontally
     @table_reversed = @table.reverse
