@@ -55,6 +55,7 @@ class MazeSolver
     read_file
     set_reversed_table
     parse_maze
+    set_table_size
     create_nodes
   end
 
@@ -104,16 +105,18 @@ class MazeSolver
       y = 0
     end
 
-    # set table size values
-    @table_x = @table_reversed[0].size
-    @table_y = @table_reversed.size
-
     # create the unvisited set of nodes but remove walls
     @unvisited_set = @nodes.map { |r| r if @table_merged[r] != "X" }
     @unvisited_set.delete(nil)
 
     return @table_reversed
   end # parse_maze
+
+  # set table size values
+  def set_table_size
+    @table_x = @table_reversed[0].size
+    @table_y = @table_reversed.size
+  end
 
   # initialize nodes structure
   def create_nodes
