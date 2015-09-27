@@ -32,7 +32,7 @@ option_parser = OptionParser.new do |opt|
   opt.on("-o", "--out", "returns the result of the solution in array format (almost same as previous)") do
     options[:out] = true
   end
-  opt.separator ""
+  opt.separator ''
 end
 
 begin

@@ -159,7 +159,7 @@ class MazeSolver
       neighbours << right_node
     end
     return neighbours
-  end
+  end # check_edges
 
   # does what it says !
   def solve_dijkstra
@@ -222,6 +222,6 @@ class MazeSolver
       @shortest_path << [p, @table_convert[p]]
       @shortest_path_coords << @table_convert[p][1]
     end
-  end
+  end # find_shortest_path
 
 end
