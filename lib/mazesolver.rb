@@ -112,27 +112,6 @@ class MazeSolver
       # set the current node as the first element of the list and remove it
       @current_node = unvisited_set.shift
 
-      # set values for neighbours
-      neighbours = []
-      left_node = @current_node - @step
-      top_node = @current_node + @table_x
-      right_node = @current_node + @step
-      bottom_node = @current_node - @table_x
-
-      # check If neighbours are not in the edges
-      if left_node > 0 && @current_node % @table_x != 0 && @table_merged[left_node] != "X"
-        neighbours << left_node
-      end
-      if top_node < (@table_x * @table_y) && @table_merged[top_node] != "X"
-        neighbours << top_node
-      end
-      if bottom_node - @table_x >= 0 && @table_merged[bottom_node] != "X"
-        neighbours << bottom_node
-      end
-      if (@current_node + @step) % @table_x != 0 && @table_merged[right_node] != "X"
-        neighbours << right_node
-      end
-
       # check If the current node is the goal node
       @goal_node = @current_node if @table_merged[@current_node] == "G"
 
@@ -148,7 +127,7 @@ class MazeSolver
       # all distances of the neighbour nodes are 1.
       @node_list << {
         id: @current_node,
-        neighs: neighbours,
+        neighs: check_edges(@current_node),
         dist: @distance,
         prev: previous_node
       }
@@ -156,6 +135,31 @@ class MazeSolver
 
     return @node_list
   end # create nodes
+
+  # check neighbours for edges
+  def check_edges(current_node)
+    # set values for neighbours
+    neighbours = []
+    left_node = current_node - @step
+    top_node = current_node + @table_x
+    right_node = current_node + @step
+    bottom_node = current_node - @table_x
+
+    # check If neighbours are not in the edges
+    if left_node > 0 && current_node % @table_x != 0 && @table_merged[left_node] != "X"
+      neighbours << left_node
+    end
+    if top_node < (@table_x * @table_y) && @table_merged[top_node] != "X"
+      neighbours << top_node
+    end
+    if bottom_node - @table_x >= 0 && @table_merged[bottom_node] != "X"
+      neighbours << bottom_node
+    end
+    if (current_node + @step) % @table_x != 0 && @table_merged[right_node] != "X"
+      neighbours << right_node
+    end
+    return neighbours
+  end
 
   # does what it says !
   def solve_dijkstra
