@@ -32,16 +32,16 @@
 ##
 class MazeSolver
 
-  attr_reader :table_merged, :nodes, :table_x, :data, :start_node, :goal_node, :shortest_path, :backtrack, :node_list
+  attr_reader :table_merged, :table_x, :start_node, :goal_node, :shortest_path, :backtrack, :node_list
+  attr_accessor :data, :nodes, :table
 
-  def initialize(file)
-    @file = file
-    @data = ""
-    @table = []
-    @table_reversed = []
+  def initialize(data, nodes, table, table_reversed)
+    @data = data
+    @nodes = nodes
+    @table = table
+    @table_reversed = table_reversed
     @table_merged = []
     @table_convert = []
-    @nodes = []
     @step = 1
     @start_node = 999
     @goal_node =  999
@@ -53,35 +53,10 @@ class MazeSolver
     @shortest_path = []
     @shortest_path_coords = []
     @backtrack = []
-    read_file
-    set_reversed_table
     parse_maze
     create_unvisited_set
     set_table_size
     create_nodes
-  end
-
-  # reads data from the maze file to @table
-  def read_file
-    k = 0
-    @data = File.read(@file)
-    @data.strip.split(/[\l|\n\/]/).each do |line|
-      @row = []
-      line.split(/ /).each do |item|
-        @row << item
-        # append an incremental number for each node, for example
-        # [0,0] becomes 0, [0,1] becomes 1, [0,2] becomes 2 etc.
-        @nodes << k
-        k = k + 1
-      end
-      @table << @row
-    end
-  end
-
-  # flip table values horizontally
-  def set_reversed_table
-
-    @table_reversed = @table.reverse
   end
 
   # convert the maze string to an array of arrays

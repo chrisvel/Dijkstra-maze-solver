@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require_relative "lib/mazefile.rb"
 require_relative "lib/mazesolver.rb"
 require_relative "lib/mazeprint.rb"
 require 'optparse'
@@ -46,7 +47,9 @@ end
 
 if options[:file]
   begin
-    solve_my_maze = MazeSolver.new(ARGV[0])
+    maze_file = MazeFile.new(ARGV[0])
+
+    solve_my_maze = MazeSolver.new(maze_file.data, maze_file.nodes, maze_file.table, maze_file.table_reversed)
     result = solve_my_maze.solve_dijkstra
 
     args = [
