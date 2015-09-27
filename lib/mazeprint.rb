@@ -1,7 +1,7 @@
 # print statistics to the console
 class MazePrint
 
-  def initialize(options={})
+  def initialize( options={} )
     @table_merged = options[:table_merged]
     @nodes = options[:nodes]
     @table_x = options[:table_x]
