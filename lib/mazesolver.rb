@@ -32,10 +32,10 @@
 ##
 class MazeSolver
 
-  attr_reader :table_merged, :table_x, :start_node, :goal_node, :shortest_path, :backtrack, :node_list
-  attr_accessor :data, :nodes, :table
+  attr_reader :table_merged, :table_x, :start_node, :goal_node, :shortest_path, :backtrack, :node_list, :nodes
+  attr_accessor :data, :table
 
-  def initialize(data, nodes, table, table_reversed)
+  def initialize(data, table, table_reversed)
     @data = data
     @nodes = nodes
     @table = table
@@ -54,9 +54,10 @@ class MazeSolver
     @shortest_path_coords = []
     @backtrack = []
     parse_maze
+    create_nodes
     create_unvisited_set
     set_table_size
-    create_nodes
+    create_node_list
   end
 
   # convert the maze string to an array of arrays
@@ -83,20 +84,26 @@ class MazeSolver
     end
   end # parse_maze
 
-  # create the unvisited set of nodes but remove walls
-  def create_unvisited_set
-    @unvisited_set = @nodes.map { |r| r if @table_merged[r] != "X" }
-    @unvisited_set.delete(nil)
-  end
-
   # set table size values
   def set_table_size
     @table_x = @table_reversed[0].size
     @table_y = @table_reversed.size
   end
 
-  # initialize nodes structure
+  # append an incremental number for each node, for example
+  # [0,0] becomes 0, [0,1] becomes 1, [0,2] becomes 2 etc.
   def create_nodes
+    @nodes = [*0...@table.flatten.length]
+  end
+
+  # create the unvisited set of nodes but remove walls
+  def create_unvisited_set
+    @unvisited_set = @nodes.map { |r| r if @table_merged[r] != "X" }
+    @unvisited_set.delete(nil)
+  end
+
+  # initialize nodes structure
+  def create_node_list
 
     previous_node = nil
 

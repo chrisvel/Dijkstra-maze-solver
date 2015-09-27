@@ -49,7 +49,7 @@ if options[:file]
   begin
     maze_file = MazeFile.new(ARGV[0])
 
-    solve_my_maze = MazeSolver.new(maze_file.data, maze_file.nodes, maze_file.table, maze_file.table_reversed)
+    solve_my_maze = MazeSolver.new(maze_file.data, maze_file.table, maze_file.table_reversed)
     result = solve_my_maze.solve_dijkstra
 
     args = [
