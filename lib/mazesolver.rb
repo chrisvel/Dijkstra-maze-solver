@@ -60,12 +60,10 @@ class MazeSolver
     create_node_list
   end
 
-  # convert the maze string to an array of arrays
+  # searches for start node but not for the goal node
+  # the robot does not know where the goal node is but we need to find out
+  # where to start at
   def parse_maze
-
-    # search for start node but not for the goal node
-    # the robot does not know where the goal node is but we need to find out
-    # where to start at
     x = 0
     y = 0
     z = 0 # will be used as a node number
@@ -76,10 +74,10 @@ class MazeSolver
         # create a simple array with all values
         @table_merged << item
         @table_convert << [item, [x, y]]
-        y = y + 1
-        z = z + 1
+        y += 1
+        z += 1
       end
-      x = x + 1
+      x += 1
       y = 0
     end
   end # parse_maze
@@ -100,6 +98,7 @@ class MazeSolver
   def create_unvisited_set
     @unvisited_set = @nodes.map { |r| r if @table_merged[r] != "X" }
     @unvisited_set.delete(nil)
+    @unvisited_set
   end
 
   # initialize nodes structure
@@ -139,8 +138,6 @@ class MazeSolver
         prev: previous_node
       }
     end
-
-    return @node_list
   end # create nodes
 
   # check neighbours for edges

@@ -39,6 +39,8 @@ describe MazeFile do
     it "creates a table with the right amount of data" do
       expect(mazefile.table.flatten.length).to eq 48
     end
+    it { expect(mazefile.table).not_to be_empty }
+    it { expect(mazefile.table.flatten).to include("S", "G", "0", "X") }
   end
 
   context "#reverse_table" do
@@ -50,6 +52,7 @@ describe MazeFile do
     it "reverses data successfully" do
       expect(mazefile.table_reversed).to eq(mazefile.table.reverse)
     end
+    it { expect(mazefile.table_reversed).not_to be_empty }
   end
 
 end
