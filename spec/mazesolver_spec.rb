@@ -45,13 +45,13 @@ describe MazeSolver do
   end
 
   context "#parse_maze" do
-    it "should be an Array" do
+    it "should return a merged table as an Array" do
       expect(mazesolver.table_merged).to be_an_instance_of(Array)
     end
     it "should include mandatory nodes for main path" do
       expect(mazesolver.table_merged).to include("S", "G", "0", "X")
     end
-    it "should be an Array" do
+    it "should return a converted table as an Array" do
       expect(mazesolver.instance_variable_get(:@table_convert)).to be_an_instance_of(Array)
     end
     it "should include start node in the right array value" do
@@ -59,7 +59,7 @@ describe MazeSolver do
     end
   end
   context "#create_nodes" do
-    it "should be an Array" do
+    it "should return nodes as an Array" do
       expect(mazesolver.nodes).to be_an_instance_of(Array)
     end
     it "should have the right amount of values" do
@@ -67,7 +67,7 @@ describe MazeSolver do
     end
   end
   context "#create_unvisited_set" do
-    it "should be an Array" do
+    it "should return the unvisited_set as an Array" do
       expect(mazesolver.instance_variable_get(:@unvisited_set)).to be_an_instance_of(Array)
     end
     it "should include the right amount of values" do
@@ -81,7 +81,7 @@ describe MazeSolver do
     end
   end
   context "#create_node_list" do
-    it "should be an Array" do
+    it "should return node_list as an Array" do
       expect(mazesolver.node_list).to be_an_instance_of(Array)
     end
     it "should include nodes as hashes" do
@@ -111,7 +111,9 @@ describe MazeSolver do
     end
   end
   context "#find_shortest_path" do
-    pending
+    it "should return an Array" do
+      expect(mazesolver.instance_variable_get(:@shortest_path_coords)).to be_an_instance_of(Array)
+    end
   end
 
 

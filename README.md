@@ -28,10 +28,12 @@
  Web references that have been used for the solution:
  * https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
  * Various youtube lecture videos on Dijkstra's algorithm
+ * https://www.relishapp.com/rspec/rspec-expectations/v/3-3
+ * https://gist.github.com/adamstegman/926858 # to silence the stdout and redirect to /dev/null
 
 ###Usage
 
-The execution of the program is pretty simple:
+The execution of the program is pretty simple and uses optparser:
 
 `ruby main.rb data/maze.txt [argument]`
 
