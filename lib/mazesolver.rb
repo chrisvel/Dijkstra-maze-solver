@@ -17,7 +17,7 @@
 # Then we iterate over the node list, picking up the neighbour node with the
 # smallest distance value and move on. In order to keep track of what we' ve
 # discovered and what' s left to be done, we keep an unvisited nodes list and a
-# queue (LIFO).
+# queue (FIFO).
 #
 # If we find a node with a "G" as a value then we' ve reached our goal, so we
 # backtrack our solution, following the previous nodes inside of each hash/node

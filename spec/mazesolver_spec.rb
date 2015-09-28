@@ -3,10 +3,10 @@ require_relative '../lib/mazesolver.rb'
 
 describe MazeSolver do
 
-  subject(:mazesolver) {
+  subject(:mazesolver) do
     maze_file = MazeFile.new('data/maze.txt')
     MazeSolver.new(maze_file.data, maze_file.table, maze_file.table_reversed)
-  }
+  end
 
   it { is_expected.to respond_to(:table_merged) }
   it { is_expected.to respond_to(:table_x) }
@@ -101,22 +101,20 @@ describe MazeSolver do
     end
   end
   context "#check_edges" do
-    it "should return an Array" do
-      (1..10).each { expect(mazesolver.check_edges(rand(0..mazesolver.nodes.length))).to be_an_instance_of(Array) }
+    it "should return neighbours for the current node as an Array" do
+      (1..(mazesolver.nodes.length/2)).each { expect(mazesolver.check_edges(rand(0..mazesolver.nodes.length))).to be_an_instance_of(Array) }
     end
   end
   context "#solve_dijkstra" do
     it "should return an Array" do
       expect(mazesolver.solve_dijkstra).to be_an_instance_of(Array)
+      expect(mazesolver.instance_variable_get(:@shortest_path_coords)).to be_an_instance_of(Array)
     end
   end
   context "#find_shortest_path" do
     it "should return an Array" do
-      expect(mazesolver.instance_variable_get(:@shortest_path_coords)).to be_an_instance_of(Array)
+      expect(mazesolver.instance_variable_get(:@shortest_path)).to be_an_instance_of(Array)
     end
   end
-
-
-
 
 end

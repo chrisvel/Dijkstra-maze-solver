@@ -20,11 +20,11 @@ class MazeFile
       line.split(/ /).each { |item| row << item }
       @table << row
     end
-  end
+  end # read_file
 
   # flip table values horizontally
   def reverse_table
     @table_reversed = @table.reverse
-  end
+  end # reverse_table
 
 end

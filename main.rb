@@ -17,9 +17,6 @@ option_parser = OptionParser.new do |opt|
   opt.on("-f", "choose the path and the filename of the maze") do
     options[:file] = true
   end
-  opt.on("--ptb", "prints the table and the 1d numbers generated") do
-    options[:ptb] = true
-  end
   opt.on("--pst", "prints statistics") do
     options[:pst] = true
   end
@@ -65,10 +62,7 @@ if options[:file]
     ]
     print_maze_stats = MazePrint.new(*args)
 
-    if options[:ptb]
-      # print the table and the 1d numbers generated
-      puts result.inspect
-    elsif options[:pst]
+    if options[:pst]
       # print final stats
       print_maze_stats.print_stats
     elsif options[:pnf]

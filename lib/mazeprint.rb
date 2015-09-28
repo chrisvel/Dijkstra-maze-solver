@@ -1,4 +1,4 @@
-# print statistics to the console
+# prints statistics to the console
 class MazePrint
 
   def initialize(options = {})
@@ -39,9 +39,10 @@ class MazePrint
     puts
   end # print_stats
 
+  # prints a table with hashes including information about all nodes
   def print_nodes_final
     puts
     puts @node_list
     puts
-  end
+  end # print_nodes_final
 end

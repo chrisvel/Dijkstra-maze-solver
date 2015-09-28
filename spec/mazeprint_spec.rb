@@ -3,11 +3,9 @@ require_relative '../lib/mazeprint.rb'
 
 describe MazePrint do
 
-  subject(:mazeprint) {
+  subject(:mazeprint) do
     maze_file = MazeFile.new('data/maze.txt')
-
     solve_my_maze = MazeSolver.new(maze_file.data, maze_file.table, maze_file.table_reversed)
-    result = solve_my_maze.solve_dijkstra
 
     args = [
       table_merged: solve_my_maze.table_merged,
@@ -21,7 +19,7 @@ describe MazePrint do
       data: solve_my_maze.data
     ]
     MazePrint.new(*args)
-  }
+  end
 
   it { is_expected.to respond_to(:print_table_reverse) }
   it { is_expected.to respond_to(:print_stats) }
@@ -53,7 +51,13 @@ describe MazePrint do
       expect { mazeprint.print_stats }.to output.to_stdout
     end
     it "does not print an error to stdout" do
-      expect { mazeprint.print_table_reverse }.to_not output.to_stderr
+      expect { mazeprint.print_stats }.to_not output.to_stderr
+    end
+    it "prints basic information in output to stdout" do
+      expect { mazeprint.print_stats }.to output(/Start node/).to_stdout
+      expect { mazeprint.print_stats }.to output(/Goal node/).to_stdout
+      expect { mazeprint.print_stats }.to output(/Backtrack/).to_stdout
+      expect { mazeprint.print_stats }.to output(/Shortest Path/).to_stdout
     end
   end
 
@@ -62,7 +66,12 @@ describe MazePrint do
       expect { mazeprint.print_nodes_final }.to output.to_stdout
     end
     it "does not print an error to stdout" do
-      expect { mazeprint.print_table_reverse }.to_not output.to_stderr
+      expect { mazeprint.print_nodes_final }.to_not output.to_stderr
+    end
+    it "prints node_list in output to stdout" do
+      maze_file = MazeFile.new('data/maze.txt')
+      solve_my_maze = MazeSolver.new(maze_file.data, maze_file.table, maze_file.table_reversed)
+      expect { mazeprint.print_nodes_final }.to output(/#{solve_my_maze.node_list}/).to_stdout
     end
   end
 

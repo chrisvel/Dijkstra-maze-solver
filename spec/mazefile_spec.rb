@@ -4,22 +4,12 @@ require_relative '../lib/mazefile.rb'
 describe MazeFile do
   subject(:mazefile) { MazeFile.new('data/maze.txt') }
 
-  it "has accessor for data" do
-    is_expected.to respond_to(:data)
-  end
-  it "has accessor for table" do
-    is_expected.to respond_to(:table)
-  end
-  it "has accessor for table_reversed" do
-    is_expected.to respond_to(:table_reversed)
-  end
+  it { is_expected.to respond_to(:table_reversed) }
+  it { is_expected.to respond_to(:data) }
+  it { is_expected.to respond_to(:table) }
 
-  it "has method read_file" do
-    is_expected.to respond_to(:read_file)
-  end
-  it "has method reverse_table" do
-    is_expected.to respond_to(:reverse_table)
-  end
+  it { is_expected.to respond_to(:read_file) }
+  it { is_expected.to respond_to(:reverse_table) }
 
   it "calls read_file when created" do
     expect_any_instance_of(MazeFile).to receive(:read_file)
@@ -37,7 +27,7 @@ describe MazeFile do
       expect(mazefile.data).to eq(File.read('data/maze.txt'))
     end
     it "creates a table with the right amount of data" do
-      expect(mazefile.table.flatten.length).to eq 48
+      expect(mazefile.table.flatten.length).to eq mazefile.table.length*mazefile.table.first.length
     end
     it { expect(mazefile.table).not_to be_empty }
     it { expect(mazefile.table.flatten).to include("S", "G", "0", "X") }
@@ -47,7 +37,7 @@ describe MazeFile do
     subject(:mazefile) { MazeFile.new('data/maze.txt') }
 
     it "creates a table with the right amount of data" do
-      expect(mazefile.table_reversed.flatten.length).to eq 48
+      expect(mazefile.table_reversed.flatten.length).to eq mazefile.table.length*mazefile.table.first.length
     end
     it "reverses data successfully" do
       expect(mazefile.table_reversed).to eq(mazefile.table.reverse)
