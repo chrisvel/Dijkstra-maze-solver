@@ -10,7 +10,7 @@ options = {}
 option_parser = OptionParser.new do |opt|
   opt.banner = "
     MazeSolver v1.0.1 - Solves mazes with walls...
-    Usage: main.rb -f <filename> [OPTIONS]
+    Usage: main.rb -f <filename> [OPTION]
 
     Options
     "

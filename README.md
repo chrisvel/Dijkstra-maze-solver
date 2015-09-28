@@ -35,17 +35,19 @@
 
 The execution of the program is pretty simple and uses optparser:
 
-`ruby main.rb data/maze.txt [argument]`
+`ruby main.rb -f <filename> [OPTION]`
 
-Where `[argument]` can be:
- * `pst`: prints final statistics for the maze and the solution
- * `pnf`: prints the final node set with distances and previous nodes
- * `ptr`: print the table and the 1d numbers generated
- * `out`: returns the result table
+Where `[OPTION]` can be:
+ * `--pst`: prints final statistics for the maze and the solution
+ * `--pnf`: prints the final node set with distances and previous nodes
+ * `--ptr`: print the table and the 1d numbers generated
+ * `--out`: returns the result table
 
 The result table can also be redirected to a file:
 
-`ruby main.rb data/maze.txt out > output.txt`
+`ruby main.rb -f data/maze.txt --out > output.txt`
+
+Please use `ruby main.rb -h` to view all options.
 
 in array format:
 
