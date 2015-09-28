@@ -30,10 +30,11 @@
  * Various youtube lecture videos on Dijkstra's algorithm
  * https://www.relishapp.com/rspec/rspec-expectations/v/3-3
  * https://gist.github.com/adamstegman/926858 # to silence the stdout and redirect to /dev/null
+ * http://docs.ruby-lang.org/en/2.2.0/OptionParser.html
 
 ###Usage
 
-The execution of the program is pretty simple and uses optparser:
+The execution of the program is pretty simple and uses OptionParser:
 
 `ruby main.rb -f <filename> [OPTION]`
 
